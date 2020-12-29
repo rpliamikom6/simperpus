@@ -11,7 +11,7 @@ class Katalog extends CI_Controller {
 	public function index()
 	{
 		$data=array('content'=>'katalog');
-		$data['books']=$this->Katalog_model->get_data();
+		$data['home']=$this->Katalog_model->get_data();
 		$this->load->view('layout/wrapper', $data);
     }
     
