@@ -5,7 +5,6 @@
         public function get_data($id=NULL){
             if(isset($id)){
                 $this->db->where('id_buku',$id);
-                $this->db->limit(1);
             }
             return $this->db->get($this->table);
         }

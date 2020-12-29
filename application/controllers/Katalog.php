@@ -13,7 +13,14 @@ class Katalog extends CI_Controller {
 		$data=array('content'=>'katalog');
 		$data['books']=$this->Katalog_model->get_data();
 		$this->load->view('layout/wrapper', $data);
-    }
+	}
+	
+	public function kategori($id=NULL){
+		if(!isset($id)) show_404();
+		$data=array('content'=>'katalog');
+		$data['books']=$this->Katalog_model->get_data($id);
+		$this->load->view('layout/wrapper', $data);
+	}
 	
 	public function detail($id=NULL){
 		if(!isset($id)) show_404();
