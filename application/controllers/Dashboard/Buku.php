@@ -88,7 +88,6 @@ class Buku extends CI_Controller {
 	public function hapus($id=NULL){
 		if(!isset($id)) show_404();
 
-		$this->db->where('id_buku',$id);
 		if($this->Katalog_model->delete($id)){
 			echo "Berhasil";
 		}
