@@ -151,6 +151,7 @@
         public function delete($id){
             $this->db->trans_begin();
 
+            $this->db->where('id_buku',$id);
             if($this->db->delete($this->table)){
                 if($this->db->trans_status()==true){
                     $this->db->trans_commit();
