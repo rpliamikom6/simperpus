@@ -13,6 +13,10 @@
                 <h1><?= $this->router->fetch_method()=='ubah' ? 'Ubah' : 'Tambah';?> Master Person</h1>
                 <form method="post">
                     <div class="form-group">
+                        <label>Nomor Identitas</label>
+                        <input type="text" name="identity"<?= $this->router->fetch_method()=='ubah' ? "value='$master_person[identity]'" : '';?> class="form-control">
+                    </div>
+                    <div class="form-group">
                         <label>Nama</label>
                         <input type="text" name="nama"<?= $this->router->fetch_method()=='ubah' ? "value='$master_person[nama]'" : '';?> class="form-control">
                     </div>
