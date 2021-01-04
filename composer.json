@@ -1,6 +1,7 @@
 {
     "require": {
         "components/font-awesome": "^5.15",
-        "components/bootstrap": "^4.5"
+        "components/bootstrap": "^4.5",
+        "select2/select2": "^4.0"
     }
 }

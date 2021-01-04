@@ -6,7 +6,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="<?=base_url();?>vendor/components/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="<?=base_url();?>vendor/components/font-awesome/css/all.min.css">
+    <link rel="stylesheet" href="<?=base_url();?>vendor/select2/select2/dist/css/select2.min.css">
+    <link rel="stylesheet" href="<?=base_url();?>assets/plugins/select2-bootstrap4-theme-master/dist/select2-bootstrap4.css">
     <script src="<?=base_url();?>vendor/components/jquery/jquery.min.js"></script>
+    <script src="<?=base_url();?>vendor/select2/select2/dist/js/select2.min.js"></script>
     <title>Document</title>
     <style>
         body {
