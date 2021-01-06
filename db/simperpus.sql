@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 03 Jan 2021 pada 11.39
--- Versi server: 10.4.14-MariaDB
--- Versi PHP: 7.3.22
+-- Waktu pembuatan: 06 Jan 2021 pada 23.40
+-- Versi server: 10.4.11-MariaDB
+-- Versi PHP: 7.4.5
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -31,11 +31,15 @@ CREATE TABLE `admin` (
   `id_admin` int(6) NOT NULL,
   `id_master_person` int(11) NOT NULL,
   `username` varchar(20) NOT NULL,
-  `password` varchar(6) NOT NULL,
-  `nama` varchar(50) NOT NULL,
-  `email` varchar(40) NOT NULL,
-  `alamat` varchar(50) NOT NULL
+  `password` varchar(32) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data untuk tabel `admin`
+--
+
+INSERT INTO `admin` (`id_admin`, `id_master_person`, `username`, `password`) VALUES
+(1, 1, 'edwinrtoha', '202cb962ac59075b964b07152d234b70');
 
 -- --------------------------------------------------------
 
@@ -171,7 +175,7 @@ CREATE TABLE `master_person` (
 
 INSERT INTO `master_person` (`id`, `identity`, `nama`, `alamat`, `email`, `role`, `created_at`, `updated_at`) VALUES
 (1, '17.11.1337', 'Edwin Rahmad Toha', 'Jalan Patehan Lor 22A', 'edwin.toha@students.amikom.ac.id', 'mhs', '2021-01-03 10:12:30', '2021-01-03 10:33:05'),
-(3, '', 'Siti Wijayanti', 'Ngentak', 'siti.wijayanti@students.amikom.ac.id', 'mhs', '2021-01-03 10:37:03', NULL);
+(3, '20.22.2380', 'Siti Wijayanti', 'Ngentak', 'siti.wijayanti@students.amikom.ac.id', 'mhs', '2021-01-03 10:37:03', '2021-01-03 23:24:01');
 
 -- --------------------------------------------------------
 
@@ -238,8 +242,7 @@ CREATE TABLE `transaksi` (
 ALTER TABLE `admin`
   ADD PRIMARY KEY (`id_admin`),
   ADD UNIQUE KEY `username` (`username`),
-  ADD UNIQUE KEY `id_master_person` (`id_master_person`),
-  ADD UNIQUE KEY `email` (`email`);
+  ADD UNIQUE KEY `id_master_person` (`id_master_person`);
 
 --
 -- Indeks untuk tabel `anggota`
@@ -299,7 +302,7 @@ ALTER TABLE `transaksi`
 -- AUTO_INCREMENT untuk tabel `admin`
 --
 ALTER TABLE `admin`
-  MODIFY `id_admin` int(6) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_admin` int(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT untuk tabel `anggota`
