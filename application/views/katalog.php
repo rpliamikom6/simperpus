@@ -15,7 +15,7 @@
                         <h5 class="card-title"><?= $row->judul;?></h5>
                         <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's
                             content.</p>
-                        <a href="#" class="btn btn-primary">Pinjam</a>
+                        <a href="<?= base_url('transaksi/add_cart/'.$row->id_buku);?>" class="btn btn-primary">Pinjam</a>
                     </div>
                 </div>
             </div>
