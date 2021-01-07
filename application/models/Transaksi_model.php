@@ -30,6 +30,12 @@
             return $this->db->get($this->table_detail);
         }
 
+        public function update_status($id_transaksi,$status){
+            $this->db->where('id_transaksi',$id_transaksi);
+            $this->db->set('status',$status);
+            return $this->db->update($this->table);
+        }
+
         public function add($data){
             $this->db->trans_begin();
 
