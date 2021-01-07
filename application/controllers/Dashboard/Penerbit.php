@@ -5,7 +5,12 @@ class Penerbit extends CI_Controller {
 
 	public function __construct(){
 		parent::__construct();
-		$this->load->model('Penerbit_model');
+		if(!$this->session->userdata('login')){
+			redirect(base_url('login'));
+		}
+		else{
+			$this->load->model('Penerbit_model');
+		}
 	}
 	
 	public function index()

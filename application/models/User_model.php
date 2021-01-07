@@ -3,23 +3,25 @@
         var $table='user';
 
         public function login($username,$password){
-            if(preg_match('/^[0-9]{2}\.[0-9]{2}\.[0-9]{4}/',$username)){
-            }
-            else{
-                $this->db->where('username',$this->db->escape_str($username));
-                $this->db->where('password',md5($password));
-                $this->db->limit(1);
-                if($query=$this->db->get($this->table)){
-                    if($query->num_rows()){
-                        return true;
-                    }
-                    else{
-                        return false;
-                    }
+            $this->db->where('username',$this->db->escape_str($username));
+            $this->db->where('password',md5($password));
+            $this->db->limit(1);
+            if($query=$this->db->get($this->table)){
+                if($query->num_rows()){
+                    $user=$query->result_array()[0];
+                    $data=array(
+                        'username'=>$username,
+                        'is_admin'=>$user['is_admin']
+                    );
+                    $this->session->set_userdata('login',$data);
+                    return true;
                 }
                 else{
                     return false;
                 }
+            }
+            else{
+                return false;
             }
         }
 
@@ -39,21 +41,6 @@
         public function add($data){
             
             $this->db->trans_begin();
-            
-            if($data['id_master_person']==0){
-                $mp=$data['mp'];
-                if($this->db->insert($this->table,$mp)){
-                    if($this->db->trans_status()==false){
-                        $this->db->trans_rollback();
-                        return false;
-                    }
-                }
-                else{
-                    $this->db->trans_rollback();
-                    return false;
-                }
-            }
-            unset($data['mp']);
 
             $data['password']=md5($data['password']);
 

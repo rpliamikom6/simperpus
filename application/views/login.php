@@ -69,68 +69,10 @@
 <div class="login-page">
     <div class="form">
         <h2 class="text-center">LOGIN</h2>
-        <div class="login-form">
+        <form class="login-form" method="post">
             <input type="text" id="field_username" placeholder="NIM/NI K" name="username">
             <input type="password" id="field_password" placeholder="Password" name="password">
-            <button type="button" id="button_login">login</button>
-        </div>
-        <script>
-            $('#button_login').click(function(){
-                var username=$('#field_username').val();
-                var password=$('#field_password').val();
-                if(/^[A-B][0-9]{2}\.[0-9]{2}\.[0-9]{4}$/.test(username)==true){
-                    $.ajax({
-                        url: 'http://mhsmobile.amikom.ac.id/login?username='+username+'&keyword='+password,
-                        type: "POST",
-                        headers: {
-                            "Content-Type": "application/x-www-form-urlencoded",
-                            "User-Agent": "@m!k0mXv=#neMob!le",
-                            "Accept-Encoding": "gzip"
-                        },
-                        contentType: false,
-                        processData: false,
-                        success: function(data){
-                            alert(data);
-                        }
-                    })
-
-
-                    const settings = {
-                        "async": true,
-                        "crossDomain": true,
-                        "url": "http://mhsmobile.amikom.ac.id/login",
-                        "method": "POST",
-                        "headers": {
-                            "Content-Type": "application/x-www-form-urlencoded",
-                            "User-Agent": "@m!k0mXv=#neMob!le",
-                            "Accept-Encoding": "gzip"
-                        },
-                        "data": {
-                            "username": username,
-                            "keyword": password
-                        }
-                    };
-
-                    $.ajax(settings).done(function (response) {
-                        console.log(response);
-                    });
-                }
-                else{
-                    const form = new FormData();
-                    form.append("username", username);
-                    form.append("password", password);
-                    $.ajax({
-                        url: '<?=base_url("login");?>',
-                        data: form,
-                        type: "POST",
-                        contentType: false,
-                        processData: false,
-                        success: function(data){
-                            alert(data);
-                        }
-                    })
-                }
-            })
-        </script>
+            <button type="submit" id="button_login">login</button>
+        </form>
     </div>
 </div>
