@@ -9,15 +9,33 @@ class Peminjaman extends CI_Controller {
 			redirect(base_url('login'));
 		}
 		else{
-			$this->load->model('Penerbit_model');
+			$this->load->model('Transaksi_model');
 		}
 	}
 	
 	public function index()
 	{
 		$data=array('content'=>'dashboard/peminjaman');
-		// $data['penerbit']=$this->Penerbit_model->get_data();
+		$data['peminjaman']=$this->Transaksi_model->get_data();
 		$this->load->view('layout/wrapper', $data);
+	}
+
+	public function detail($id=NULL){
+		if(!isset($id)) show_404();
+		$data=array('title'=>'Judul halaman','content'=>'dashboard/peminjaman_detail');
+		$data['peminjaman']=$this->Transaksi_model->get_data($id,1);
+		if(!$data['peminjaman']->num_rows()){
+			show_404();
+		}
+		else{
+			$data['peminjaman']=$data['peminjaman']->result_array()[0];
+			if($data['items']=$this->Transaksi_model->get_detail($data['peminjaman']['id_transaksi'])){
+				$this->load->view('layout/wrapper',$data);
+			}
+			else{
+				show_404();
+			}
+		}
 	}
 	
 	public function tambah()
@@ -25,7 +43,7 @@ class Peminjaman extends CI_Controller {
 		switch($this->input->method()){
 			case 'post':
 				$data=$this->input->post();
-				if($this->Penerbit_model->add($data)){
+				if($this->Transaksi_model->add($data)){
 					echo 'Berhasil';
 				}
 				else{
@@ -33,7 +51,7 @@ class Peminjaman extends CI_Controller {
 				}
 				break;
 			default:
-				$data=array('content'=>'dashboard/penerbit_form');
+				$data=array('content'=>'dashboard/peminjaman_form');
 				$this->load->view('layout/wrapper', $data);
 		}
     }
@@ -43,7 +61,7 @@ class Peminjaman extends CI_Controller {
 		switch($this->input->method()){
 			case 'post':
 				$data=$this->input->post();
-				if($this->Penerbit_model->edit($id,$data)){
+				if($this->Transaksi_model->edit($id,$data)){
 					echo 'Berhasil';
 				}
 				else{
@@ -52,10 +70,10 @@ class Peminjaman extends CI_Controller {
 				break;
 			default:
 				if(!isset($id)) show_404();
-				$data=array('content'=>'dashboard/penerbit_form');
-				$data['penerbit']=$this->Penerbit_model->get_data($id,1);
-				if($data['penerbit']->num_rows()){
-					$data['penerbit']=$data['penerbit']->result_array()[0];
+				$data=array('content'=>'dashboard/peminjaman_form');
+				$data['peminjaman']=$this->Transaksi_model->get_data($id,1);
+				if($data['peminjaman']->num_rows()){
+					$data['peminjaman']=$data['peminjaman']->result_array()[0];
 				}
 				else{
 					show_404();
@@ -86,17 +104,11 @@ class Peminjaman extends CI_Controller {
 	public function hapus($id=NULL){
 		if(!isset($id)) show_404();
 
-		if($this->Penerbit_model->delete($id)){
+		if($this->Transaksi_model->delete($id)){
 			echo "Berhasil";
 		}
 		else{
 			echo "Gagal";
 		}
-	}
-	
-	public function detail($id=NULL){
-		if(!isset($id)) show_404();
-		$data=array('title'=>'Judul halaman','content'=>'detail');
-		$this->load->view('layout/wrapper',$data);
 	}
 }
