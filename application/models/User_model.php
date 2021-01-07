@@ -1,22 +1,39 @@
 <?php
-    class Akun_model extends CI_Model {
-        var $table='admin';
+    class User_model extends CI_Model {
+        var $table='user';
 
         public function login($username,$password){
-            $this->db->where('username',$this->db->escape_str($username));
-            $this->db->where('password',md5($password));
-            $this->db->limit(1);
-            if($query=$this->db->get($this->table)){
-                if($query->num_rows()){
-                    return true;
+            if(preg_match('/^[0-9]{2}\.[0-9]{2}\.[0-9]{4}/',$username)){
+            }
+            else{
+                $this->db->where('username',$this->db->escape_str($username));
+                $this->db->where('password',md5($password));
+                $this->db->limit(1);
+                if($query=$this->db->get($this->table)){
+                    if($query->num_rows()){
+                        return true;
+                    }
+                    else{
+                        return false;
+                    }
                 }
                 else{
                     return false;
                 }
             }
-            else{
-                return false;
+        }
+
+        public function get_data($id=NULL,$limit=NULL){
+            $this->db->select('master_person.*');
+            $this->db->select('user.*');
+            $this->db->join('master_person','master_person.id=user.id_master_person');
+            if(isset($id)){
+                $this->db->where('user.id',$id);
             }
+            if(isset($limit)){
+                $this->db->limit($limit);
+            }
+            return $this->db->get($this->table);
         }
 
         public function add($data){

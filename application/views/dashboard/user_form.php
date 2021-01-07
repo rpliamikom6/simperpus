@@ -10,11 +10,11 @@
                 <?php require_once('layout/menu.php');?>
             </div>
             <div class="col-md-9">
-                <h1><?= $this->router->fetch_method()=='ubah' ? 'Ubah' : 'Tambah';?> Admin</h1>
+                <h1><?= $this->router->fetch_method()=='ubah' ? 'Ubah' : 'Tambah';?> User</h1>
                 <form method="post">
                     <div class="form-group">
                         <label>Username</label>
-                        <input type="text" name="username"<?= $this->router->fetch_method()=='ubah' ? "value='$admin[username]'" : '';?> class="form-control">
+                        <input type="text" name="username"<?= $this->router->fetch_method()=='ubah' ? "value='$user[username]'" : '';?> class="form-control">
                     </div>
                     <div class="row">
                         <div class="col-md">
@@ -52,7 +52,7 @@
                             <option value="0">Buat Baru</option>
                             <?php if($master_person->num_rows()):?>
                                 <?php foreach($master_person->result() as $mp):?>
-                                    <option value="<?= $mp->id;?>"<?= $this->router->fetch_method()=='ubah' ? ($mp->id==$admin['id_master_person'] ? ' selected' : '') : '';?>><?= $mp->nama;?> (<?= $mp->role=='mhs' ? 'Mahasiswa' : ucfirst($mp->role);?> | <?= $mp->identity;?>)</option>
+                                    <option value="<?= $mp->id;?>"<?= $this->router->fetch_method()=='ubah' ? ($mp->id==$user['id_master_person'] ? ' selected' : '') : '';?>><?= $mp->nama;?> (<?= $mp->role=='mhs' ? 'Mahasiswa' : ucfirst($mp->role);?> | <?= $mp->identity;?>)</option>
                                 <?php endforeach;?>
                             <?php endif;?>
                         </select>
@@ -60,19 +60,19 @@
                     <div id="form_mp" class="d-none">
                         <div class="form-group">
                             <label>Nomor Identitas</label>
-                            <input type="text" name="mp[identity]"<?= $this->router->fetch_method()=='ubah' ? "value='$admin[identity]'" : '';?> class="form-control">
+                            <input type="text" name="mp[identity]"<?= $this->router->fetch_method()=='ubah' ? "value='$user[identity]'" : '';?> class="form-control">
                         </div>
                         <div class="form-group">
                             <label>Nama</label>
-                            <input type="text" name="mp[nama]"<?= $this->router->fetch_method()=='ubah' ? "value='$admin[nama]'" : '';?> class="form-control">
+                            <input type="text" name="mp[nama]"<?= $this->router->fetch_method()=='ubah' ? "value='$user[nama]'" : '';?> class="form-control">
                         </div>
                         <div class="form-group">
                             <label>Alamat</label>
-                            <textarea name="mp[alamat]" cols="30" rows="4" class="form-control" style="resize:none;" required><?= $this->router->fetch_method()=='ubah' ? $admin['alamat'] : '';?></textarea>
+                            <textarea name="mp[alamat]" cols="30" rows="4" class="form-control" style="resize:none;" required><?= $this->router->fetch_method()=='ubah' ? $user['alamat'] : '';?></textarea>
                         </div>
                         <div class="form-group">
                             <label>Email</label>
-                            <input type="email" name="mp[email]"<?= $this->router->fetch_method()=='ubah' ? "value='$admin[email]'" : '';?> class="form-control">
+                            <input type="email" name="mp[email]"<?= $this->router->fetch_method()=='ubah' ? "value='$user[email]'" : '';?> class="form-control">
                         </div>
                         <div class="form-group">
                             <label>Role</label>
@@ -80,7 +80,7 @@
                                 <option value="">- Pilih Role -</option>
                                 <?php $option=array('publik','mhs','karyawan');?>
                                 <?php foreach($option as $opt):?>
-                                    <option value="<?= $opt;?>"<?= $this->router->fetch_method()=='ubah' ? ($opt==$admin['role'] ? ' selected' : '') : '';?>><?= $opt=='mhs' ? 'Mahasiswa' : $opt;?></option>
+                                    <option value="<?= $opt;?>"<?= $this->router->fetch_method()=='ubah' ? ($opt==$user['role'] ? ' selected' : '') : '';?>><?= $opt=='mhs' ? 'Mahasiswa' : $opt;?></option>
                                 <?php endforeach;?>
                             </select>
                         </div>

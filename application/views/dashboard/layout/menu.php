@@ -13,7 +13,7 @@
     </li>
     <div class="dropdown-divider"></div>
     <li class="nav-item">
-        <a class="nav-link" href="<?= base_url('dashboard/admin');?>">Admin</a>
+        <a class="nav-link" href="<?= base_url('dashboard/user');?>">User</a>
     </li>
     <li class="nav-item">
         <a class="nav-link" href="<?= base_url('dashboard/master_person');?>">Master Person</a>

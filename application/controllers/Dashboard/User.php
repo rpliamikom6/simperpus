@@ -1,18 +1,18 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Admin extends CI_Controller {
+class User extends CI_Controller {
 
 	public function __construct(){
 		parent::__construct();
-		$this->load->model('Admin_model');
+		$this->load->model('User_model');
 		$this->load->model('Master_person_model');
 	}
 	
 	public function index()
 	{
-		$data=array('content'=>'dashboard/admin');
-		$data['admin']=$this->Admin_model->get_data();
+		$data=array('content'=>'dashboard/user');
+		$data['user']=$this->User_model->get_data();
 		$this->load->view('layout/wrapper', $data);
 	}
 	
@@ -21,7 +21,7 @@ class Admin extends CI_Controller {
 		switch($this->input->method()){
 			case 'post':
 				$data=$this->input->post();
-				if($this->Admin_model->add($data)){
+				if($this->User_model->add($data)){
 					echo 'Berhasil';
 				}
 				else{
@@ -29,7 +29,7 @@ class Admin extends CI_Controller {
 				}
 				break;
 			default:
-				$data=array('content'=>'dashboard/admin_form');
+				$data=array('content'=>'dashboard/user_form');
 				$data['master_person']=$this->Master_person_model->get_data();
 				$this->load->view('layout/wrapper', $data);
 			}
@@ -40,7 +40,7 @@ class Admin extends CI_Controller {
 		switch($this->input->method()){
 			case 'post':
 				$data=$this->input->post();
-				if($this->Admin_model->edit($id,$data)){
+				if($this->User_model->edit($id,$data)){
 					echo 'Berhasil';
 				}
 				else{
@@ -49,10 +49,10 @@ class Admin extends CI_Controller {
 				break;
 				default:
 				if(!isset($id)) show_404();
-				$data=array('content'=>'dashboard/admin_form');
-				$data['admin']=$this->Admin_model->get_data($id,1);
-				if($data['admin']->num_rows()){
-					$data['admin']=$data['admin']->result_array()[0];
+				$data=array('content'=>'dashboard/user_form');
+				$data['user']=$this->User_model->get_data($id,1);
+				if($data['user']->num_rows()){
+					$data['user']=$data['user']->result_array()[0];
 					$data['master_person']=$this->Master_person_model->get_data();
 				}
 				else{
@@ -84,7 +84,7 @@ class Admin extends CI_Controller {
 	public function hapus($id=NULL){
 		if(!isset($id)) show_404();
 
-		if($this->Admin_model->delete($id)){
+		if($this->User_model->delete($id)){
 			echo "Berhasil";
 		}
 		else{
