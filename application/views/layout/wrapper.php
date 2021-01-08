@@ -65,17 +65,15 @@
                             <a href="#">Profile</a>
                         </li>
                         <li>
-                            <a href="#">Profile</a>
+                            <a href="#">Contact</a>
                         </li>
                         <li>
-                            <a href="#">Profile</a>
+                            <a href="#">About</a>
                         </li>
                         <li>
-                            <a href="#">Profile</a>
+                            <a href="#">Email</a>
                         </li>
-                        <li>
-                            <a href="#">Profile</a>
-                        </li>
+                       
                     </ul>
                 </div>
                 <div class="col-md-2">
