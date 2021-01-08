@@ -9,9 +9,14 @@ class Buku extends CI_Controller {
 			redirect(base_url('login'));
 		}
 		else{
-			$this->load->model('Katalog_model');
-			$this->load->model('Kategori_model');
-			$this->load->model('Penerbit_model');
+			if($this->session->userdata('login')['is_admin']!=1){
+				redirect(base_url('dashboard'));
+			}
+			else{
+				$this->load->model('Katalog_model');
+				$this->load->model('Kategori_model');
+				$this->load->model('Penerbit_model');
+			}
 		}
 	}
 	

@@ -15,6 +15,21 @@
             return $this->db->get($this->table);
         }
 
+        public function get_data_by_user($id_user,$id=NULL,$limit=NULL){
+            $this->db->join('user','user.id='.$this->table.'.id_user');
+            $this->db->join('master_person','master_person.id=user.id_master_person');
+            if(isset($id_user)){
+                $this->db->where($this->table.'.id_user',$id_user);
+            }
+            if(isset($id)){
+                $this->db->where($this->table.'.id_transaksi',$id);
+            }
+            if(isset($limit)){
+                $this->db->limit($limit);
+            }
+            return $this->db->get($this->table);
+        }
+
         public function get_cart($cart){
             foreach($cart as $keranjang){
                 $this->db->or_where('id_buku',$keranjang);

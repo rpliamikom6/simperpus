@@ -9,7 +9,12 @@ class Master_person extends CI_Controller {
 			redirect(base_url('login'));
 		}
 		else{
-			$this->load->model('Master_person_model');
+			if($this->session->userdata('login')['is_admin']!=1){
+				redirect(base_url('dashboard'));
+			}
+			else{
+				$this->load->model('Master_person_model');
+			}
 		}
 	}
 	

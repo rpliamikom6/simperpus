@@ -135,15 +135,19 @@
                                             echo '<button id="btn_input_resi_peminjaman" class="btn btn-block btn-success" data-toggle="modal" data-target="#exampleModal">Masukan Resi</button>';
                                             break;
                                         case 2:
-                                            echo '<a href="'.base_url('dashboard/peminjaman/konfirmasi_pengiriman/'.$peminjaman['id_transaksi']).'" id="btn_konfirmasi_pengiriman" class="btn btn-block btn-success">Konfirmasi Pengiriman</a>';
+                                            if($this->session->userdata('login')['id_user']==$peminjaman['id_user']){
+                                                echo '<a href="'.base_url('dashboard/peminjaman/konfirmasi_pengiriman/'.$peminjaman['id_transaksi']).'" id="btn_konfirmasi_pengiriman" class="btn btn-block btn-success">Konfirmasi Pengiriman</a>';
+                                            }
                                             break;
                                         case 3:
                                             if($this->session->userdata('login')['id_user']==$peminjaman['id_user']){
-                                                echo '<button id="btn_input_resi_peminjaman" class="btn btn-block btn-success" data-toggle="modal" data-target="#exampleModal2">Masukan Resi</button>';
+                                                echo '<button id="btn_input_resi_peminjaman" class="btn btn-block btn-success" data-toggle="modal" data-target="#exampleModal2">Kembalikan</button>';
                                             }
                                             break;
                                         case 4:
-                                            echo '<a href="'.base_url('dashboard/peminjaman/konfirmasi_pengembalian/'.$peminjaman['id_transaksi']).'" id="btn_konfirmasi_pengembalian" class="btn btn-block btn-success">Konfirmasi Pengembalian</a>';
+                                            if($this->session->userdata('login')['is_admin']==1){
+                                                echo '<a href="'.base_url('dashboard/peminjaman/konfirmasi_pengembalian/'.$peminjaman['id_transaksi']).'" id="btn_konfirmasi_pengembalian" class="btn btn-block btn-success">Konfirmasi Pengembalian</a>';
+                                            }
                                             break;
                                         case 5:
                                             echo '<h2 class="text-center"><span class="badge badge-success">Selesai</span></h2>';
