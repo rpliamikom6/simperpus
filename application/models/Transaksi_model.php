@@ -23,43 +23,45 @@
             return $this->db->get('buku');
         }
 
-        public function checkout($id_user,$cart){
-            $this->db->trans_begin();
-
-            $data=array(
-                'id_user'=>$id_user,
-                'status'=>0
-            );
-            if($this->db->insert($this->table,$data)){
-                if(!$this->db->trans_status()==true){
+        public function checkout($data,$cart){
+            if(!empty($cart)){
+                $this->db->trans_begin();
+    
+                if($this->db->insert($this->table,$data)){
+                    if(!$this->db->trans_status()==true){
+                        $this->db->trans_rollback();
+                        return false;
+                    }
+                    else{
+                        $id_transaksi=$this->db->insert_id();
+                    }
+                }
+                else{
                     $this->db->trans_rollback();
                     return false;
                 }
-                else{
-                    $id_transaksi=$this->db->insert_id();
+                unset($data);
+                foreach($cart as $id_buku){
+                    $data[]=array(
+                        'id_transaksi'=>$id_transaksi,
+                        'id_buku'=>$id_buku
+                    );
+                }
+                
+                if($this->db->insert_batch($this->table_detail,$data)){
+                    if($this->db->trans_status()==true){
+                        $this->db->trans_commit();
+                        $this->session->unset_userdata('cart');
+                        return true;
+                    }
+                    else{
+                        $this->db->trans_rollback();
+                        return false;
+                    }
                 }
             }
             else{
-                $this->db->trans_rollback();
                 return false;
-            }
-            
-            foreach($cart as $id_buku){
-                $data[]=array(
-                    'id_transaksi'=>$id_transaksi,
-                    'id_buku'=>$id_buku
-                );
-            }
-            
-            if($this->db->insert_batch($this->table_detail,$data)){
-                if($this->db->trans_status()==true){
-                    $this->db->trans_commit();
-                    return true;
-                }
-                else{
-                    $this->db->trans_rollback();
-                    return false;
-                }
             }
         }
         

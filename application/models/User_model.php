@@ -10,6 +10,7 @@
                 if($query->num_rows()){
                     $user=$query->result_array()[0];
                     $data=array(
+                        'id_user'=>$user['id'],
                         'username'=>$username,
                         'is_admin'=>$user['is_admin']
                     );

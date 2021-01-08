@@ -108,7 +108,7 @@
                                                 <?php if($items->num_rows()):?>
                                                     <?php foreach($items->result() as $item):?>
                                                         <tr>
-                                                            <td style="width: 20%;" rowspan="2">
+                                                            <td style="width: 20%;">
                                                                 <img src="https://www.duniailkom.com/wp-content/uploads/2019/05/Cover-PHP-Uncover-2.0-Banner-big.jpg" alt="" class="img-fluid">
                                                             </td>
                                                             <td>

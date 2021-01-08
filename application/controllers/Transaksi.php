@@ -6,6 +6,7 @@ class Transaksi extends CI_Controller {
 	public function __construct(){
 		parent::__construct();
 		$this->load->model('Transaksi_model');
+		$this->load->model('Master_metode_pengiriman_model');
 	}
 	
 	public function index()
@@ -21,6 +22,7 @@ class Transaksi extends CI_Controller {
 			if($data['cart']=$this->Transaksi_model->get_cart($this->session->userdata('cart'))){
 				if($data['cart']->num_rows()){
 					$data['cart']=$data['cart']->result_array();
+					$data['metode_pengiriman']=$this->Master_metode_pengiriman_model->get_data();
 				}
 				else{
 					unset($data['cart']);
@@ -28,6 +30,15 @@ class Transaksi extends CI_Controller {
 			}
 		}
 		$this->load->view('layout/wrapper', $data);
+	}
+	
+	public function delete_item_cart($id_buku){
+		if($this->session->userdata('cart')){
+			$cart=$this->session->userdata('cart');
+			$cart=array_diff($cart,array($id_buku));
+			$this->session->set_userdata('cart',$cart);
+		}
+		redirect(base_url('transaksi/cart'));
 	}
     
     public function add_cart($id_buku,$redirect=NULL){
@@ -48,5 +59,22 @@ class Transaksi extends CI_Controller {
 		else{
 			redirect(base_url('katalog'));
 		}
-    }
+	}
+	
+	public function checkout(){
+		if($this->session->userdata('cart')){
+			$data=$this->input->post();
+			$data['id_user']=$this->session->userdata('login')['id_user'];
+			$cart=$this->session->userdata('cart');
+			if($this->Transaksi_model->checkout($data,$cart)){
+				echo 'Berhasil';
+			}
+			else{
+				echo 'Gagal';
+			}
+		}
+		else{
+			echo 'Cart masih kosong';
+		}
+	}
 }
