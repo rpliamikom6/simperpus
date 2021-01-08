@@ -70,7 +70,7 @@
     <div class="form">
         <h2 class="text-center">LOGIN</h2>
         <form class="login-form" method="post">
-            <input type="text" id="field_username" placeholder="NIM/NI K" name="username">
+            <input type="text" id="field_username" placeholder="Username" name="username">
             <input type="password" id="field_password" placeholder="Password" name="password">
             <button type="submit" id="button_login">login</button>
         </form>
