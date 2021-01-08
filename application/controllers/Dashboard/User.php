@@ -90,10 +90,10 @@ class User extends CI_Controller {
 		if(!isset($id)) show_404();
 
 		if($this->User_model->delete($id)){
-			echo "Berhasil";
+			redirect(base_url('dashboard/user'));
 		}
 		else{
-			echo "Gagal";
+			redirect(base_url('dashboard/user'));
 		}
 	}
 	

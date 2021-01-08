@@ -68,10 +68,10 @@ class Kategori extends CI_Controller {
 		if(!isset($id)) show_404();
 
 		if($this->Kategori_model->delete($id)){
-			echo "Berhasil";
+			redirect(base_url('dashboard/kategori'));
 		}
 		else{
-			echo "Gagal";
+			redirect(base_url('dashboard/kategori'));
 		}
 	}
 }

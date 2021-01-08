@@ -28,10 +28,10 @@ class Buku extends CI_Controller {
 			case 'post':
 				$data=$this->input->post();
 				if($this->Katalog_model->add($data)){
-					echo 'Berhasil';
+					redirect(base_url('dashboard/buku'));
 				}
 				else{
-					echo 'Gagal';
+					redirect(base_url('dashboard/buku'));
 				}
 				break;
 			default:
@@ -48,10 +48,10 @@ class Buku extends CI_Controller {
 			case 'post':
 				$data=$this->input->post();
 				if($this->Katalog_model->edit($id,$data)){
-					echo 'Berhasil';
+					redirect(base_url('dashboard/buku'));
 				}
 				else{
-					echo 'Gagal';
+					redirect(base_url('dashboard/buku'));
 				}
 				break;
 			default:

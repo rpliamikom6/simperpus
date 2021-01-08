@@ -87,10 +87,10 @@ class Master_person extends CI_Controller {
 		if(!isset($id)) show_404();
 
 		if($this->Master_person_model->delete($id)){
-			echo "Berhasil";
+			redirect(base_url('dashboard/master_person'));
 		}
 		else{
-			echo "Gagal";
+			redirect(base_url('dashboard/master_person'));
 		}
 	}
 	

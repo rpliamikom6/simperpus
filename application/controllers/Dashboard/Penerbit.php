@@ -87,10 +87,10 @@ class Penerbit extends CI_Controller {
 		if(!isset($id)) show_404();
 
 		if($this->Penerbit_model->delete($id)){
-			echo "Berhasil";
+			redirect(base_url('dashboard/penerbit'));
 		}
 		else{
-			echo "Gagal";
+			redirect(base_url('dashboard/penerbit'));
 		}
 	}
 	

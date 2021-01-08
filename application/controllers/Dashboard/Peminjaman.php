@@ -44,7 +44,7 @@ class Peminjaman extends CI_Controller {
 			case 'post':
 				$data=$this->input->post();
 				if($this->Transaksi_model->add($data)){
-					echo 'Berhasil';
+					redirect(base_url('dashboard/peminjaman'));
 				}
 				else{
 					redirect(base_url('dashboard/peminjaman'));
@@ -62,7 +62,7 @@ class Peminjaman extends CI_Controller {
 			case 'post':
 				$data=$this->input->post();
 				if($this->Transaksi_model->edit($id,$data)){
-					echo 'Berhasil';
+					redirect(base_url('dashboard/peminjaman'));
 				}
 				else{
 					redirect(base_url('dashboard/peminjaman'));
