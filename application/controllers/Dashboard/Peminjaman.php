@@ -10,6 +10,7 @@ class Peminjaman extends CI_Controller {
 		}
 		else{
 			$this->load->model('Transaksi_model');
+			$this->load->model('Master_metode_pengiriman_model');
 		}
 	}
 	
@@ -30,6 +31,7 @@ class Peminjaman extends CI_Controller {
 		else{
 			$data['peminjaman']=$data['peminjaman']->result_array()[0];
 			if($data['items']=$this->Transaksi_model->get_detail($data['peminjaman']['id_transaksi'])){
+				$data['metode_pengiriman']=$this->Master_metode_pengiriman_model->get_data();
 				$this->load->view('layout/wrapper',$data);
 			}
 			else{
@@ -123,6 +125,17 @@ class Peminjaman extends CI_Controller {
 		}
 	}
 
+	public function konfirmasi_pengembalian($id_transaksi=NULL){
+		if(!isset($id_transaksi)) show_404();
+
+		if($this->Transaksi_model->konfirmasi_pengembalian($id_transaksi)){
+			redirect(base_url('dashboard/peminjaman/detail/'.$id_transaksi));
+		}
+		else{
+			redirect(base_url('dashboard/peminjaman'));
+		}
+	}
+
 	public function konfirmasi_pengiriman($id_transaksi=NULL){
 		if(!isset($id_transaksi)) show_404();
 
@@ -140,6 +153,20 @@ class Peminjaman extends CI_Controller {
 		$resi=$this->input->post('resi_pengiriman');
 
 		if($this->Transaksi_model->input_resi_peminjaman($id_transaksi,$resi)){
+			redirect(base_url('dashboard/peminjaman/detail/'.$id_transaksi));
+		}
+		else{
+			redirect(base_url('dashboard/peminjaman'));
+		}
+	}
+
+	public function input_resi_pengembalian($id_transaksi=NULL){
+		if(!isset($id_transaksi)) show_404();
+
+		$resi['id_metode_pengembalian']=$this->input->post('id_metode_pengembalian');
+		$resi['resi_pengembalian']=$this->input->post('resi_pengembalian');
+
+		if($this->Transaksi_model->input_resi_pengembalian($id_transaksi,$resi)){
 			redirect(base_url('dashboard/peminjaman/detail/'.$id_transaksi));
 		}
 		else{

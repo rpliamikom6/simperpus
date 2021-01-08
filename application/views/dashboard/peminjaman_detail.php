@@ -138,14 +138,14 @@
                                             echo '<a href="'.base_url('dashboard/peminjaman/konfirmasi_pengiriman/'.$peminjaman['id_transaksi']).'" id="btn_konfirmasi_pengiriman" class="btn btn-block btn-success">Konfirmasi Pengiriman</a>';
                                             break;
                                         case 3:
+                                            if($this->session->userdata('login')['id_user']==$peminjaman['id_user']){
+                                                echo '<button id="btn_input_resi_peminjaman" class="btn btn-block btn-success" data-toggle="modal" data-target="#exampleModal2">Masukan Resi</button>';
+                                            }
                                             break;
                                         case 4:
-                                            echo '<button id="btn_input_resi_pengembalian" class="btn btn-block btn-success">Masukan Resi</button>';
+                                            echo '<a href="'.base_url('dashboard/peminjaman/konfirmasi_pengembalian/'.$peminjaman['id_transaksi']).'" id="btn_konfirmasi_pengembalian" class="btn btn-block btn-success">Konfirmasi Pengembalian</a>';
                                             break;
                                         case 5:
-                                            echo '<button id="btn_konfirmasi_pengembalian" class="btn btn-block btn-success">Masukan Resi</button>';
-                                            break;
-                                        case 6:
                                             echo '<h2 class="text-center"><span class="badge badge-success">Selesai</span></h2>';
                                             break;
                                     }
@@ -154,7 +154,7 @@
                                     <div class="modal-dialog" role="document">
                                         <div class="modal-content">
                                             <div class="modal-header">
-                                                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                                                <h5 class="modal-title" id="exampleModalLabel">Resi Peminjaman</h5>
                                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                     <span aria-hidden="true">&times;</span>
                                                 </button>
@@ -164,6 +164,47 @@
                                                     <div class="form-group">
                                                         <label>Nomor Resi</label>
                                                         <input type="text" name="resi_pengiriman" class="form-control" placeholder="Nomor Resi">
+                                                    </div>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                    <button type="submit" class="btn btn-primary">Save changes</button>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+
+
+                                <div class="modal fade" id="exampleModal2" tabindex="-1" role="dialog" aria-labelledby="exampleModal2Label" aria-hidden="true">
+                                    <div class="modal-dialog" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="exampleModal2Label">Resi Pengembalian</h5>
+                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                            <form action="<?= base_url('dashboard/peminjaman/input_resi_pengembalian/'.$peminjaman['id_transaksi']);?>" method="post">
+                                                <div class="modal-body">
+                                                    <div class="form-group">
+                                                        <label>Nomor Resi</label>
+                                                        <select name="id_metode_pengembalian" id="id_metode_pengembalian" class="form-control">
+                                                            <option value="">- Pilih Metode Pengembalian -</option>
+                                                            <?php if($metode_pengiriman->num_rows()):?>
+                                                                <?php foreach($metode_pengiriman->result() as $metode_pengembalian):?>
+                                                                    <?php if($metode_pengembalian->id!=1):?>
+                                                                        <option value="<?= $metode_pengembalian->id;?>"><?= $metode_pengembalian->nama;?></option>
+                                                                    <?php endif;?>
+                                                                <?php endforeach;?>
+                                                            <?php endif;?>
+                                                        </select>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label>Nomor Resi</label>
+                                                        <input type="text" name="resi_pengembalian" class="form-control" placeholder="Nomor Resi">
                                                     </div>
                                                 </div>
                                                 <div class="modal-footer">

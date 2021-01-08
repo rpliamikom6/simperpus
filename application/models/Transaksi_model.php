@@ -87,6 +87,29 @@
             }
         }
 
+        public function input_resi_pengembalian($id_transaksi=NULL,$resi){
+            $this->db->trans_begin();
+
+            $this->db->set('id_metode_pengembalian',$resi['id_metode_pengembalian']);
+            $this->db->set('resi_pengembalian',$resi['resi_pengembalian']);
+            $this->db->set('status',4);
+            $this->db->where('id_transaksi',$id_transaksi);
+            if($this->db->update($this->table)){
+                if($this->db->trans_status()==true){
+                    $this->db->trans_commit();
+                    return true;
+                }
+                else{
+                    $this->db->trans_rollback();
+                    return false;
+                }
+            }
+            else{
+                $this->db->trans_rollback();
+                return false;
+            }
+        }
+
         public function konfirmasi_peminjaman($id_transaksi,$status){
             if($status==1 || $status==99){
                 $this->db->trans_begin();
@@ -109,6 +132,27 @@
                 }
             }
             else{
+                return false;
+            }
+        }
+
+        public function konfirmasi_pengembalian($id_transaksi){
+            $this->db->trans_begin();
+            
+            $this->db->set('status',5);
+            $this->db->where('id_transaksi',$id_transaksi);
+            if($this->db->update($this->table)){
+                if($this->db->trans_status()==true){
+                    $this->db->trans_commit();
+                    return true;
+                }
+                else{
+                    $this->db->trans_rollback();
+                    return false;
+                }
+            }
+            else{
+                $this->db->trans_rollback();
                 return false;
             }
         }
