@@ -5,6 +5,15 @@
 
     }
 </style>
+
+<br><br>
+<div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
+  <div class="carousel-inner">
+    <div class="carousel-item active">
+      <img src="<?=base_url('assets/img/kategori/bg.jpg');?>" class="d-block w-100" alt="...">
+    </div>
+  </div>
+<br><br>
 <div id="katalog" class="d-flex justify-content-around flex-wrap">
     <?php if($books->num_rows()):?>
         <?php foreach($books->result() as $row):?>
