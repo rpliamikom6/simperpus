@@ -17,6 +17,10 @@
                         <input type="text" name="judul"<?= $this->router->fetch_method()=='ubah' ? "value='$buku[judul]'" : '';?> class="form-control">
                     </div>
                     <div class="form-group">
+                        <label>URL Gambar</label>
+                        <input type="text" name="gambar"<?= $this->router->fetch_method()=='ubah' ? "value='$buku[gambar]'" : '';?> class="form-control">
+                    </div>
+                    <div class="form-group">
                         <label>Kategori</label>
                         <select name="id_kategori" class="form-control" required>
                             <option value="">- Pilih Kategori -</option>
