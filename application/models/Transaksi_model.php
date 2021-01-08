@@ -14,7 +14,14 @@
             }
             return $this->db->get($this->table);
         }
-        
+
+        public function get_cart($cart){
+            foreach($cart as $keranjang){
+                $this->db->or_where('id_buku',$keranjang);
+            }
+            $this->db->join('penerbit','penerbit.id_penerbit=buku.id_penerbit');
+            return $this->db->get('buku');
+        }
         public function get_detail($id_transaksi,$id_buku=NULL){
             if(isset($id_transaksi)){
                 $this->db->where($this->table_detail.'.id_transaksi',$id_transaksi);
