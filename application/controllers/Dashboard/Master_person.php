@@ -9,7 +9,12 @@ class Master_person extends CI_Controller {
 			redirect(base_url('login'));
 		}
 		else{
-			$this->load->model('Master_person_model');
+			if($this->session->userdata('login')['is_admin']!=1){
+				redirect(base_url('dashboard'));
+			}
+			else{
+				$this->load->model('Master_person_model');
+			}
 		}
 	}
 	
@@ -87,10 +92,10 @@ class Master_person extends CI_Controller {
 		if(!isset($id)) show_404();
 
 		if($this->Master_person_model->delete($id)){
-			echo "Berhasil";
+			redirect(base_url('dashboard/master_person'));
 		}
 		else{
-			echo "Gagal";
+			redirect(base_url('dashboard/master_person'));
 		}
 	}
 	

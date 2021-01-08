@@ -9,7 +9,12 @@ class Kategori extends CI_Controller {
 			redirect(base_url('login'));
 		}
 		else{
-			$this->load->model('Kategori_model');
+			if($this->session->userdata('login')['is_admin']!=1){
+				redirect(base_url('dashboard'));
+			}
+			else{
+				$this->load->model('Kategori_model');
+			}
 		}
 	}
 	
@@ -68,10 +73,10 @@ class Kategori extends CI_Controller {
 		if(!isset($id)) show_404();
 
 		if($this->Kategori_model->delete($id)){
-			echo "Berhasil";
+			redirect(base_url('dashboard/kategori'));
 		}
 		else{
-			echo "Gagal";
+			redirect(base_url('dashboard/kategori'));
 		}
 	}
 }

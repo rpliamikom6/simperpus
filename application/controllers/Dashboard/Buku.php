@@ -9,9 +9,14 @@ class Buku extends CI_Controller {
 			redirect(base_url('login'));
 		}
 		else{
-			$this->load->model('Katalog_model');
-			$this->load->model('Kategori_model');
-			$this->load->model('Penerbit_model');
+			if($this->session->userdata('login')['is_admin']!=1){
+				redirect(base_url('dashboard'));
+			}
+			else{
+				$this->load->model('Katalog_model');
+				$this->load->model('Kategori_model');
+				$this->load->model('Penerbit_model');
+			}
 		}
 	}
 	
@@ -28,10 +33,10 @@ class Buku extends CI_Controller {
 			case 'post':
 				$data=$this->input->post();
 				if($this->Katalog_model->add($data)){
-					echo 'Berhasil';
+					redirect(base_url('dashboard/buku'));
 				}
 				else{
-					echo 'Gagal';
+					redirect(base_url('dashboard/buku'));
 				}
 				break;
 			default:
@@ -48,10 +53,10 @@ class Buku extends CI_Controller {
 			case 'post':
 				$data=$this->input->post();
 				if($this->Katalog_model->edit($id,$data)){
-					echo 'Berhasil';
+					redirect(base_url('dashboard/buku'));
 				}
 				else{
-					echo 'Gagal';
+					redirect(base_url('dashboard/buku'));
 				}
 				break;
 			default:

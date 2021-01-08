@@ -70,14 +70,14 @@ class Transaksi extends CI_Controller {
 			$data['id_user']=$this->session->userdata('login')['id_user'];
 			$cart=$this->session->userdata('cart');
 			if($this->Transaksi_model->checkout($data,$cart)){
-				echo 'Berhasil';
+				redirect(base_url('transaksi/cart'));
 			}
 			else{
-				echo 'Gagal';
+				redirect(base_url('transaksi/cart'));
 			}
 		}
 		else{
-			echo 'Cart masih kosong';
+			redirect(base_url('transaksi/cart'));
 		}
 	}
 }

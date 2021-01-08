@@ -9,7 +9,12 @@ class Penerbit extends CI_Controller {
 			redirect(base_url('login'));
 		}
 		else{
-			$this->load->model('Penerbit_model');
+			if($this->session->userdata('login')['is_admin']!=1){
+				redirect(base_url('dashboard'));
+			}
+			else{
+				$this->load->model('Penerbit_model');
+			}
 		}
 	}
 	
@@ -87,10 +92,10 @@ class Penerbit extends CI_Controller {
 		if(!isset($id)) show_404();
 
 		if($this->Penerbit_model->delete($id)){
-			echo "Berhasil";
+			redirect(base_url('dashboard/penerbit'));
 		}
 		else{
-			echo "Gagal";
+			redirect(base_url('dashboard/penerbit'));
 		}
 	}
 	
