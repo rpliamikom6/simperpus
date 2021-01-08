@@ -59,7 +59,7 @@
                         </a>
                     </div>
                 </div>
-                <div class="col-md-5">
+                <div class="col-md">
                     <ul id="main-header-menu" style="text-align: right;">
                         <li>
                             <a href="#">Profile</a>
@@ -87,9 +87,11 @@
                                 <a href="<?= base_url('login');?>">Login</a>
                             <?php endif;?>
                         </li>
-                        <li>
-                            <a href="<?= base_url('transaksi/cart');?>"><i class="fas fa-shopping-cart"></i> <span class="badge badge-success"><?= $this->session->userdata('cart') ? sizeof($this->session->userdata('cart')) : 0;?></span></a>
-                        </li>
+                        <?php if($this->session->userdata('login')):?>
+                            <li>
+                                <a href="<?= base_url('transaksi/cart');?>"><i class="fas fa-shopping-cart"></i> <span class="badge badge-success"><?= $this->session->userdata('cart') ? sizeof($this->session->userdata('cart')) : 0;?></span></a>
+                            </li>
+                        <?php endif;?>
                     </ul>
                 </div>
             </div>
