@@ -51,7 +51,7 @@
     </section>
     <section id="main-header">
         <div class="container">
-            <div class="row">
+            <div class="d-flex flex-wrap justify-content-between">
                 <div class="col-md-4">
                     <div class="logo-container">
                         <a href="https://home.amikom.ac.id/">
@@ -59,7 +59,7 @@
                         </a>
                     </div>
                 </div>
-                <div class="col-md-8">
+                <div class="col-md-6">
                     <ul id="main-header-menu" style="text-align: right;">
                         <li>
                             <a href="#">Profile</a>
@@ -75,6 +75,16 @@
                         </li>
                         <li>
                             <a href="#">Profile</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="col-md-2">
+                    <ul id="main-header-menu" style="text-align: right;">
+                        <li>
+                            <a href="<?= base_url('login');?>">Login</a>
+                        </li>
+                        <li>
+                            <a href="<?= base_url('transaksi/cart');?>"><i class="fas fa-shopping-cart"></i> <span class="badge badge-success"><?= $this->session->userdata('cart') ? sizeof($this->session->userdata('cart')) : 0;?></span></a>
                         </li>
                     </ul>
                 </div>

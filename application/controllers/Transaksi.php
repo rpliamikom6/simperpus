@@ -16,6 +16,18 @@ class Transaksi extends CI_Controller {
 	}
 
 	public function cart(){
+		$data=array('content'=>'cart');
+		if($this->session->userdata('cart')){
+			if($data['cart']=$this->Transaksi_model->get_cart($this->session->userdata('cart'))){
+				if($data['cart']->num_rows()){
+					$data['cart']=$data['cart']->result_array();
+				}
+				else{
+					unset($data['cart']);
+				}
+			}
+		}
+		$this->load->view('layout/wrapper', $data);
 	}
     
     public function add_cart($id_buku,$redirect=NULL){
