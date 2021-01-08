@@ -64,6 +64,75 @@
                 return false;
             }
         }
+
+        public function input_resi_peminjaman($id_transaksi=NULL,$resi){
+            $this->db->trans_begin();
+
+            $this->db->set('resi_pengiriman',$resi);
+            $this->db->set('status',2);
+            $this->db->where('id_transaksi',$id_transaksi);
+            if($this->db->update($this->table)){
+                if($this->db->trans_status()==true){
+                    $this->db->trans_commit();
+                    return true;
+                }
+                else{
+                    $this->db->trans_rollback();
+                    return false;
+                }
+            }
+            else{
+                $this->db->trans_rollback();
+                return false;
+            }
+        }
+
+        public function konfirmasi_peminjaman($id_transaksi,$status){
+            if($status==1 || $status==99){
+                $this->db->trans_begin();
+                
+                $this->db->set('status',$status);
+                $this->db->where('id_transaksi',$id_transaksi);
+                if($this->db->update($this->table)){
+                    if($this->db->trans_status()==true){
+                        $this->db->trans_commit();
+                        return true;
+                    }
+                    else{
+                        $this->db->trans_rollback();
+                        return false;
+                    }
+                }
+                else{
+                    $this->db->trans_rollback();
+                    return false;
+                }
+            }
+            else{
+                return false;
+            }
+        }
+        
+        public function konfirmasi_pengiriman($id_transaksi){
+            $this->db->trans_begin();
+            
+            $this->db->set('status',3);
+            $this->db->where('id_transaksi',$id_transaksi);
+            if($this->db->update($this->table)){
+                if($this->db->trans_status()==true){
+                    $this->db->trans_commit();
+                    return true;
+                }
+                else{
+                    $this->db->trans_rollback();
+                    return false;
+                }
+            }
+            else{
+                $this->db->trans_rollback();
+                return false;
+            }
+        }
         
         public function get_detail($id_transaksi,$id_buku=NULL){
             if(isset($id_transaksi)){

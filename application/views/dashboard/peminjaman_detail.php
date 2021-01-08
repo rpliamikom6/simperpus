@@ -65,31 +65,31 @@
                                 </div>
                                 <span>Pesanan dibuat</span>
                             </div>
-                            <div class="step">
+                            <div class="step<?= $peminjaman['status']>0 && $peminjaman['status']<99 ? ' success' : ($peminjaman['status']==99 ? ' danger' : '');?>">
                                 <div class="step-icon">
                                     <i class="fas fa-boxes"></i>
                                 </div>
                                 <span>Sedang diproses</span>
                             </div>
-                            <div class="step">
+                            <div class="step<?= $peminjaman['status']>1 && $peminjaman['status']<99 ? ' success' : ($peminjaman['status']==99 ? ' danger' : '');?>">
                                 <div class="step-icon">
                                     <i class="fas fa-truck-moving"></i>
                                 </div>
                                 <span>Dalam pengiriman</span>
                             </div>
-                            <div class="step">
+                            <div class="step<?= $peminjaman['status']>2 && $peminjaman['status']<99 ? ' success' : ($peminjaman['status']==99 ? ' danger' : '');?>">
                                 <div class="step-icon">
                                     <i class="fas fa-people-carry"></i>
                                 </div>
                                 <span>Diterima</span>
                             </div>
-                            <div class="step">
+                            <div class="step<?= $peminjaman['status']>3 && $peminjaman['status']<99 ? ' success' : ($peminjaman['status']==99 ? ' danger' : '');?>">
                                 <div class="step-icon">
                                     <i class="fas fa-undo"></i>
                                 </div>
                                 <span>Proses pengembalian</span>
                             </div>
-                            <div class="step">
+                            <div class="step<?= $peminjaman['status']>4 && $peminjaman['status']<99 ? ' success' : ($peminjaman['status']==99 ? ' danger' : '');?>">
                                 <div class="step-icon">
                                     <i class="fas fa-check"></i>
                                 </div>
@@ -109,7 +109,7 @@
                                                     <?php foreach($items->result() as $item):?>
                                                         <tr>
                                                             <td style="width: 20%;">
-                                                                <img src="https://www.duniailkom.com/wp-content/uploads/2019/05/Cover-PHP-Uncover-2.0-Banner-big.jpg" alt="" class="img-fluid">
+                                                                <img src="<?= $item->gambar;?>" alt="" class="img-fluid">
                                                             </td>
                                                             <td>
                                                                 <b><?= $item->judul;?></b><br>
@@ -127,14 +127,15 @@
                                 <?php
                                     switch($peminjaman['status']){
                                         case 0:
-                                            echo '<button id="btn_terima_peminjaman" class="btn btn-block btn-success">Terima</button>
-                                            <button id="btn_tolak_peminjaman" class="btn btn-block btn-danger">Tolak</button>';
+                                            base_url('dashboard/peminjaman/input_resi_peminjaman/'.$peminjaman['id_transaksi']);
+                                            echo '<a id="btn_terima_peminjaman" href="'.base_url('dashboard/peminjaman/konfirmasi_peminjaman/'.$peminjaman['id_transaksi']).'/1'.'" class="btn btn-block btn-success">Terima</a>
+                                            <a id="btn_tolak_peminjaman" href="'.base_url('dashboard/peminjaman/konfirmasi_peminjaman/'.$peminjaman['id_transaksi']).'/99'.'" class="btn btn-block btn-danger">Tolak</a>';
                                             break;
                                         case 1:
-                                            echo '<button id="btn_input_resi_peminjaman" class="btn btn-block btn-success">Masukan Resi</button>';
+                                            echo '<button id="btn_input_resi_peminjaman" class="btn btn-block btn-success" data-toggle="modal" data-target="#exampleModal">Masukan Resi</button>';
                                             break;
                                         case 2:
-                                            echo '<button id="btn_konfirmasi_pengiriman" class="btn btn-block btn-success">Konfirmasi Pengiriman</button>';
+                                            echo '<a href="'.base_url('dashboard/peminjaman/konfirmasi_pengiriman/'.$peminjaman['id_transaksi']).'" id="btn_konfirmasi_pengiriman" class="btn btn-block btn-success">Konfirmasi Pengiriman</a>';
                                             break;
                                         case 3:
                                             break;
@@ -149,6 +150,35 @@
                                             break;
                                     }
                                 ?>
+                                <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                            <form action="<?= base_url('dashboard/peminjaman/input_resi_peminjaman/'.$peminjaman['id_transaksi']);?>" method="post">
+                                                <div class="modal-body">
+                                                    <div class="form-group">
+                                                        <label>Nomor Resi</label>
+                                                        <input type="text" name="resi_pengiriman" class="form-control" placeholder="Nomor Resi">
+                                                    </div>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                    <button type="submit" class="btn btn-primary">Save changes</button>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                                <script>
+                                    $('#btn_input_resi_peminjaman').click(function(){
+
+                                    })
+                                </script>
                             </div>
                         </div>
                     </div>

@@ -111,4 +111,39 @@ class Peminjaman extends CI_Controller {
 			echo "Gagal";
 		}
 	}
+
+	public function konfirmasi_peminjaman($id_transaksi=NULL,$status=NULL){
+		if(!isset($id_transaksi) || !isset($status)) show_404();
+
+		if($this->Transaksi_model->konfirmasi_peminjaman($id_transaksi,$status)){
+			redirect(base_url('dashboard/peminjaman/detail/'.$id_transaksi));
+		}
+		else{
+			echo 'Gagal';
+		}
+	}
+
+	public function konfirmasi_pengiriman($id_transaksi=NULL){
+		if(!isset($id_transaksi)) show_404();
+
+		if($this->Transaksi_model->konfirmasi_pengiriman($id_transaksi)){
+			redirect(base_url('dashboard/peminjaman/detail/'.$id_transaksi));
+		}
+		else{
+			echo 'Gagal';
+		}
+	}
+
+	public function input_resi_peminjaman($id_transaksi=NULL){
+		if(!isset($id_transaksi)) show_404();
+
+		$resi=$this->input->post('resi_pengiriman');
+
+		if($this->Transaksi_model->input_resi_peminjaman($id_transaksi,$resi)){
+			redirect(base_url('dashboard/peminjaman/detail/'.$id_transaksi));
+		}
+		else{
+			echo "Gagal";
+		}
+	}
 }
