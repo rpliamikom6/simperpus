@@ -54,12 +54,12 @@
             <div class="d-flex flex-wrap justify-content-between">
                 <div class="col-md-4">
                     <div class="logo-container">
-                        <a href="https://home.amikom.ac.id/">
-                            <img class=" ls-is-cached lazyloaded" src="https://cdn.shortpixel.ai/client/q_lossy,ret_img/https://home.amikom.ac.id/media/2020/08/logo-amikom-t.png" data-src="https://cdn.shortpixel.ai/client/q_lossy,ret_img/https://home.amikom.ac.id/media/2020/08/logo-amikom-t.png" alt="Universitas Amikom Yogyakarta" id="logo" data-height-percentage="60" data-actual-width="1051" data-actual-height="375">
+                        <a href="<?=base_url();?>">
+                            <img class=" ls-is-cached lazyloaded" src="https://home.amikom.ac.id/media/2020/08/logo-amikom-t.png" alt="Universitas Amikom Yogyakarta" id="logo" data-height-percentage="60" data-actual-width="1051" data-actual-height="375">
                         </a>
                     </div>
                 </div>
-                <div class="col-md-6">
+                <div class="col-md-5">
                     <ul id="main-header-menu" style="text-align: right;">
                         <li>
                             <a href="#">Profile</a>
@@ -78,10 +78,14 @@
                         </li>
                     </ul>
                 </div>
-                <div class="col-md-2">
+                <div class="col-md-3">
                     <ul id="main-header-menu" style="text-align: right;">
                         <li>
-                            <a href="<?= base_url('login');?>">Login</a>
+                            <?php if($this->session->userdata('login')):?>
+                                <a href="<?= base_url('dashboard');?>">Dashboard</a>
+                            <?php else:?>
+                                <a href="<?= base_url('login');?>">Login</a>
+                            <?php endif;?>
                         </li>
                         <li>
                             <a href="<?= base_url('transaksi/cart');?>"><i class="fas fa-shopping-cart"></i> <span class="badge badge-success"><?= $this->session->userdata('cart') ? sizeof($this->session->userdata('cart')) : 0;?></span></a>
