@@ -26,10 +26,10 @@ class Kategori extends CI_Controller {
 			case 'post':
 				$data=$this->input->post();
 				if($this->Kategori_model->add($data)){
-					echo 'Berhasil';
+					redirect(base_url('dashboard/kategori'));
 				}
 				else{
-					echo 'Gagal';
+					redirect(base_url('dashboard/kategori'));
 				}
 				break;
 			default:
@@ -44,10 +44,10 @@ class Kategori extends CI_Controller {
 			case 'post':
 				$data=$this->input->post();
 				if($this->Kategori_model->edit($id,$data)){
-					echo 'Berhasil';
+					redirect(base_url('dashboard/kategori'));
 				}
 				else{
-					echo 'Gagal';
+					redirect(base_url('dashboard/kategori'));
 				}
 				break;
 			default:

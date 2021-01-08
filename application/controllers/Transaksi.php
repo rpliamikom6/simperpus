@@ -7,6 +7,9 @@ class Transaksi extends CI_Controller {
 		parent::__construct();
 		$this->load->model('Transaksi_model');
 		$this->load->model('Master_metode_pengiriman_model');
+		if(!$this->session->userdata('login')){
+			redirect(base_url('login'));
+		}
 	}
 	
 	public function index()

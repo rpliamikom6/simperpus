@@ -26,10 +26,10 @@ class Master_metode_pengiriman extends CI_Controller {
 			case 'post':
 				$data=$this->input->post();
 				if($this->Master_metode_pengiriman_model->add($data)){
-					echo 'Berhasil';
+					redirect(base_url('dashboard/master_metode_pengiriman'));
 				}
 				else{
-					echo 'Gagal';
+					redirect(base_url('dashboard/master_metode_pengiriman'));
 				}
 				break;
 			default:
@@ -44,10 +44,10 @@ class Master_metode_pengiriman extends CI_Controller {
 			case 'post':
 				$data=$this->input->post();
 				if($this->Master_metode_pengiriman_model->edit($id,$data)){
-					echo 'Berhasil';
+					redirect(base_url('dashboard/master_metode_pengiriman'));
 				}
 				else{
-					echo 'Gagal';
+					redirect(base_url('dashboard/master_metode_pengiriman'));
 				}
 				break;
 			default:

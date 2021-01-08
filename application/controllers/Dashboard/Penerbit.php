@@ -26,10 +26,10 @@ class Penerbit extends CI_Controller {
 			case 'post':
 				$data=$this->input->post();
 				if($this->Penerbit_model->add($data)){
-					echo 'Berhasil';
+					redirect(base_url('dashboard/penerbit'));
 				}
 				else{
-					echo 'Gagal';
+					redirect(base_url('dashboard/penerbit'));
 				}
 				break;
 			default:
@@ -44,10 +44,10 @@ class Penerbit extends CI_Controller {
 			case 'post':
 				$data=$this->input->post();
 				if($this->Penerbit_model->edit($id,$data)){
-					echo 'Berhasil';
+					redirect(base_url('dashboard/penerbit'));
 				}
 				else{
-					echo 'Gagal';
+					redirect(base_url('dashboard/penerbit'));
 				}
 				break;
 			default:

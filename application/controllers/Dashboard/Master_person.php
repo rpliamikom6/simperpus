@@ -26,10 +26,10 @@ class Master_person extends CI_Controller {
 			case 'post':
 				$data=$this->input->post();
 				if($this->Master_person_model->add($data)){
-					echo 'Berhasil';
+					redirect(base_url('dashboard/master_person'));
 				}
 				else{
-					echo 'Gagal';
+					redirect(base_url('dashboard/master_person'));
 				}
 				break;
 			default:
@@ -44,10 +44,10 @@ class Master_person extends CI_Controller {
 			case 'post':
 				$data=$this->input->post();
 				if($this->Master_person_model->edit($id,$data)){
-					echo 'Berhasil';
+					redirect(base_url('dashboard/master_person'));
 				}
 				else{
-					echo 'Gagal';
+					redirect(base_url('dashboard/master_person'));
 				}
 				break;
 			default:

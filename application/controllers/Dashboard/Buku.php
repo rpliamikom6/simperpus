@@ -94,10 +94,10 @@ class Buku extends CI_Controller {
 		if(!isset($id)) show_404();
 
 		if($this->Katalog_model->delete($id)){
-			echo "Berhasil";
+			redirect(base_url('dashboard/buku'));
 		}
 		else{
-			echo "Gagal";
+			redirect(base_url('dashboard/buku'));
 		}
 	}
 	

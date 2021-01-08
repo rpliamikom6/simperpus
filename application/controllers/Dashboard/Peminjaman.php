@@ -47,7 +47,7 @@ class Peminjaman extends CI_Controller {
 					echo 'Berhasil';
 				}
 				else{
-					echo 'Gagal';
+					redirect(base_url('dashboard/peminjaman'));
 				}
 				break;
 			default:
@@ -65,7 +65,7 @@ class Peminjaman extends CI_Controller {
 					echo 'Berhasil';
 				}
 				else{
-					echo 'Gagal';
+					redirect(base_url('dashboard/peminjaman'));
 				}
 				break;
 			default:
@@ -105,10 +105,10 @@ class Peminjaman extends CI_Controller {
 		if(!isset($id)) show_404();
 
 		if($this->Transaksi_model->delete($id)){
-			echo "Berhasil";
+			redirect(base_url('dashboard/peminjaman'));
 		}
 		else{
-			echo "Gagal";
+			redirect(base_url('dashboard/peminjaman'));
 		}
 	}
 
@@ -119,7 +119,7 @@ class Peminjaman extends CI_Controller {
 			redirect(base_url('dashboard/peminjaman/detail/'.$id_transaksi));
 		}
 		else{
-			echo 'Gagal';
+			redirect(base_url('dashboard/peminjaman'));
 		}
 	}
 
@@ -130,7 +130,7 @@ class Peminjaman extends CI_Controller {
 			redirect(base_url('dashboard/peminjaman/detail/'.$id_transaksi));
 		}
 		else{
-			echo 'Gagal';
+			redirect(base_url('dashboard/peminjaman'));
 		}
 	}
 
@@ -143,7 +143,7 @@ class Peminjaman extends CI_Controller {
 			redirect(base_url('dashboard/peminjaman/detail/'.$id_transaksi));
 		}
 		else{
-			echo "Gagal";
+			redirect(base_url('dashboard/peminjaman'));
 		}
 	}
 }

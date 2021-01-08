@@ -27,10 +27,10 @@ class User extends CI_Controller {
 			case 'post':
 				$data=$this->input->post();
 				if($this->User_model->add($data)){
-					echo 'Berhasil';
+					redirect(base_url('dashboard/user'));
 				}
 				else{
-					echo 'Gagal';
+					redirect(base_url('dashboard/user'));
 				}
 				break;
 			default:
@@ -46,10 +46,10 @@ class User extends CI_Controller {
 			case 'post':
 				$data=$this->input->post();
 				if($this->User_model->edit($id,$data)){
-					echo 'Berhasil';
+					redirect(base_url('dashboard/user'));
 				}
 				else{
-					echo 'Gagal';
+					redirect(base_url('dashboard/user'));
 				}
 				break;
 				default:
