@@ -5,7 +5,7 @@
 </style>
 <div id="dashboard">
     <div class="container">
-        <h1>Dashboard</h1>
+        <h1>Dashboard Admin</h1>
         <div class="row">
             <div class="col-md-3">
                 <ul class="nav flex-column">
@@ -13,14 +13,12 @@
                         <a class="nav-link" href="<?= base_url('dashboard/buku');?>">Buku</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Link</a>
+                        <a class="nav-link" href="#">Denda</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Link</a>
+                        <a class="nav-link" href="#">Pengunjung</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link disabled" href="#">Disabled</a>
-                    </li>
+                    
                 </ul>
             </div>
             <div class="col-md-9">
