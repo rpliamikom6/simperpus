@@ -14,16 +14,22 @@ class Transaksi extends CI_Controller {
 		$data['kategori']=$this->Transaksi_model->get_data();
 		$this->load->view('layout/wrapper', $data);
 	}
+
+	public function cart(){
+	}
     
     public function add_cart($id_buku,$redirect=NULL){
 		$i=0;
-        if(!is_null(get_cookie('cart'))){
-			$cart=get_cookie('cart');
+		if($this->session->userdata('cart')){
+			$cart=$this->session->userdata('cart');
+			if(in_array($id_buku,$cart)){
+				echo "Batas peminjaman satu buku per judul per transaksi";
+				exit;
+			}
 			$i=sizeof($cart);
-			delete_cookie('cart');
 		}
 		$cart[$i]=$id_buku;
-		set_cookie('cart','cookie_value','86400');
+		$this->session->set_userdata('cart',$cart);
 		if(isset($redirect)){
 			redirect($redirect);
 		}
