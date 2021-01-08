@@ -1,9 +1,9 @@
 ###################
 Install with Composer
 ###################
-``cli
+```cli
 composer install
-``
+```
 
 ###################
 What is CodeIgniter
