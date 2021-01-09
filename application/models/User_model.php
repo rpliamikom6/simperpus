@@ -64,6 +64,15 @@
         public function edit($id,$data){
             $this->db->trans_begin();
 
+            if(isset($data['password'])){
+                if(!empty($data['password'])){
+                    $data['password']=md5($data['password']);
+                }
+                else{
+                    unset($data['password']);
+                }
+            }
+
             $this->db->where('id',$id);
             if($this->db->update($this->table,$data)){
                 if($this->db->trans_status()==true){

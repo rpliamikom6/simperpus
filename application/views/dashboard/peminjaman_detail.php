@@ -127,9 +127,11 @@
                                 <?php
                                     switch($peminjaman['status']){
                                         case 0:
-                                            base_url('dashboard/peminjaman/input_resi_peminjaman/'.$peminjaman['id_transaksi']);
-                                            echo '<a id="btn_terima_peminjaman" href="'.base_url('dashboard/peminjaman/konfirmasi_peminjaman/'.$peminjaman['id_transaksi']).'/1'.'" class="btn btn-block btn-success">Terima</a>
-                                            <a id="btn_tolak_peminjaman" href="'.base_url('dashboard/peminjaman/konfirmasi_peminjaman/'.$peminjaman['id_transaksi']).'/99'.'" class="btn btn-block btn-danger">Tolak</a>';
+                                            if($this->session->userdata('login')['is_admin']==1){
+                                                base_url('dashboard/peminjaman/input_resi_peminjaman/'.$peminjaman['id_transaksi']);
+                                                echo '<a id="btn_terima_peminjaman" href="'.base_url('dashboard/peminjaman/konfirmasi_peminjaman/'.$peminjaman['id_transaksi']).'/1'.'" class="btn btn-block btn-success">Terima</a>
+                                                <a id="btn_tolak_peminjaman" href="'.base_url('dashboard/peminjaman/konfirmasi_peminjaman/'.$peminjaman['id_transaksi']).'/99'.'" class="btn btn-block btn-danger">Tolak</a>';
+                                            }
                                             break;
                                         case 1:
                                             echo '<button id="btn_input_resi_peminjaman" class="btn btn-block btn-success" data-toggle="modal" data-target="#exampleModal">Masukan Resi</button>';
