@@ -172,18 +172,13 @@ class Peminjaman extends CI_Controller {
 	}
 
 	public function konfirmasi_pengiriman($id_transaksi=NULL){
-		if($this->session->userdata('login')['is_admin']==1){
-			redirect(base_url('dashboard/peminjaman'));
+		if(!isset($id_transaksi)) show_404();
+
+		if($this->Transaksi_model->konfirmasi_pengiriman($id_transaksi)){
+			redirect(base_url('dashboard/peminjaman/detail/'.$id_transaksi));
 		}
 		else{
-			if(!isset($id_transaksi)) show_404();
-	
-			if($this->Transaksi_model->konfirmasi_pengiriman($id_transaksi)){
-				redirect(base_url('dashboard/peminjaman/detail/'.$id_transaksi));
-			}
-			else{
-				redirect(base_url('dashboard/peminjaman'));
-			}
+			redirect(base_url('dashboard/peminjaman'));
 		}
 	}
 
