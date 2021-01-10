@@ -73,6 +73,9 @@
                         <li>
                             <a href="#">Email</a>
                         </li>
+                        <li>
+                            <a href="#">Info</a>
+                        </li>
                        
                     </ul>
                 </div>
